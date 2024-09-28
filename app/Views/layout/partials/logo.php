@@ -1,0 +1,1 @@
+<img src="<?= site_url('images/logo.png') ?>" alt="logo">

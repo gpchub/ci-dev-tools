@@ -1,0 +1,254 @@
+:root {
+    --container-width: 1200px;
+
+    --color-text: #212529;
+    --color-1: #0391D2;
+}
+
+html, body {
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: var(--container-width);
+    padding: 0 15px;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { border-radius: 10px; background: rgba(0, 0, 0, 0.1); }
+::-webkit-scrollbar-thumb { border-radius: 10px; background: rgba(0, 0, 0, 0.2); }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.4); }
+::-webkit-scrollbar-thumb:active { background: rgba(0, 0, 0, 0.9); }
+
+[x-cloak] { display: none !important; }
+
+/*=============================================
+=            layout            =
+=============================================*/
+.heroe {
+    margin: 0 auto;
+    padding: 3rem 1rem;
+    background-color: rgba(247, 248, 249, 1);
+}
+
+.heroe h1 {
+    margin: 0;
+}
+
+main {
+    padding: 2rem 0;
+}
+
+/*=============================================
+=            header            =
+=============================================*/
+.main-header {
+    --menu-divider: 1px solid #6eb2db;
+    --submenu-divider: 1px solid #6eb2db;
+    --submenu-indent: 30px;
+    --submenu-background: transparent;
+    --menu-background: var(--color-1);
+    --menu-link-color: #fff;
+    --menu-link-hover-color: #fff;
+    --menu-link-padding: 10px 15px;
+
+    background: #fff;
+}
+
+.main-header .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header .logo { padding: 8px 0; }
+
+.main-header .menu-toggler {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background: var(--color-1);
+    color: #fff;
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-menu { width: 100%; display: none; }
+
+.main-header.open .main-menu { display: block; }
+
+.main-menu a {
+    color: var(--menu-link-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: var(--menu-link-padding);
+}
+
+.main-menu a:hover {
+    color: var(--menu-link-hover-color);
+}
+
+.main-menu ul {
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 8px;
+    background: var(--menu-background);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-menu li { position: relative; }
+
+.main-menu > ul > li + li { border-top: var(--menu-divider); }
+
+.main-menu > ul > li > ul {
+    box-shadow: none;
+    border-top: var(--menu-divider);
+    border-radius: 0;
+    display: none;
+    background-color: var(--submenu-background);
+}
+
+.main-menu > ul > li.open > ul { display: block; }
+
+.main-menu > ul > li > ul > li { padding-left: var(--submenu-indent); }
+
+.main-menu > ul > li > ul > li + li { border-top: var(--submenu-divider); }
+
+@media screen and (min-width: 768px) {
+
+    .main-header {
+        --menu-divider: none;
+        --submenu-divider: 1px solid #ebeff2;
+        --submenu-indent: 0;
+        --submenu-background: #fff;
+        --menu-background: transparent;
+        --menu-link-color: var(--color-text);
+        --menu-link-hover-color: var(--color-1);
+
+        background: #fff;
+    }
+
+    .main-header .menu-toggler { display: none }
+
+    .main-menu { display: flex; width: auto; }
+
+    .main-menu ul { display: flex; align-items: center; box-shadow: none; }
+
+    .main-menu > ul > li > ul {
+        position: absolute;
+        top: 100%;
+        min-width: 200px;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    }
+
+    .main-menu > ul > li:hover > ul { display: block; }
+}
+
+/*=============================================
+=            Form            =
+=============================================*/
+:not(.flex) > .form-group + .form-group { margin-top: 1rem; }
+
+.help-text { font-size: 14px; color: #777; }
+.help-text p { margin-bottom: .25rem }
+.error-message { display: block; font-size: 14px; color: rgb(241, 58, 58) }
+
+/*=============================================
+=            Components            =
+=============================================*/
+/*---------- Code block ---------- */
+my-code-block { overflow: auto }
+
+/*---------- Card ---------- */
+.card {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+/*---------- Tooltip ---------- */
+/* Tooltip container */
+[data-tooltip] {
+	position: relative;
+	display: inline-block;
+}
+
+/* Tooltip text */
+[data-tooltip]:after {
+	display: block;
+	content: attr(data-tooltip);
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 4px 8px;
+	border-radius: 6px;
+	font-size: 12px;
+
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+[data-tooltip]:hover:after {
+	visibility: visible;
+}
+
+/*=============================================
+=            Pages            =
+=============================================*/
+.modules h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.modules__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.modules button {
+    background-color: #ebeff2;
+    color: var(--color-text);
+}
+
+.modules button.active {
+    background-color: #0391D2;
+    color: #fff;
+}
+
+.table-conversion {
+    column-count: 3;
+    column-gap: 0;
+}
+
+.table-conversion .table-conversion__item {
+    padding: 2px 4px;
+}
+
+.table-conversion .table-conversion__item:nth-child( odd ) {
+    background: #FFF9FD;
+}
