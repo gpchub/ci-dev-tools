@@ -15,6 +15,7 @@
 
                     <ul>
                         <li><a href="<?= url_to('generator.list') ?>">Danh sách</a></li>
+                        <li><a href="<?= url_to('generator.qrcode') ?>">QR Code</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">
