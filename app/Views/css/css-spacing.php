@@ -53,7 +53,7 @@
                     </template>
                 </div>
                 <div>
-                    <my-code-block x-text="result"></my-code-block>
+                    <my-code-block x-text="result" class="max-h-128"></my-code-block>
                 </div>
             </my-card>
         </div>

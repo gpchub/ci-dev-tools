@@ -220,7 +220,7 @@
                                 </div>
 
                                 <div class="item-actions">
-                                    <button class="is-remove" x-show="!task.editing" @click="removeTask(task)">
+                                    <button class="is-remove" x-show="!task.editing" @click="removeTask(task)" data-tooltip="Xoá">
                                         <i class='bx bx-trash' ></i>
                                     </button>
                                 </div>
