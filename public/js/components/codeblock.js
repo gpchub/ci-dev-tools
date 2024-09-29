@@ -20,15 +20,23 @@ class CodeBlock extends HTMLElement
                 unicode-bidi: isolate;
                 min-height: 52px;
             }
-            pre { margin: 0; white-space: pre-wrap; }
+            .button-wrapper {
+                position: sticky;
+                top: 0;
+                right: 0;
+                width: 100%;
+                overflow: visible;
+                z-index: 2;
+            }
             button {
                 position: absolute;
-                right: 8px;
-                top: 8px;
+                right: -10px;
+                top: 0px;
                 color: #59636e;
                 background: transparent;
                 border: none;
                 cursor: pointer;
+                background: var(--b-bg-2);
             }
             button svg {
                 fill: #59636e;
@@ -60,18 +68,23 @@ class CodeBlock extends HTMLElement
             button:hover:before {
                 opacity: 1;
             }
+            pre { position: relative; z-index: 1; margin: 0; white-space: pre-wrap; }
         `;
         this.shadowRoot.append(style);
+
+        const buttonWrapper = document.createElement('div');
+        buttonWrapper.classList.add('button-wrapper');
+
+        const button = document.createElement("button");
+        button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>';
+        button.addEventListener('click', this.handleClick.bind(this));
+        buttonWrapper.appendChild(button);
+        this.shadowRoot.appendChild(buttonWrapper);
 
         const pre = document.createElement("pre");
         const slot = document.createElement("slot");
         pre.appendChild(slot);
         this.shadowRoot.appendChild(pre);
-
-        const button = document.createElement("button");
-        button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>';
-        button.addEventListener('click', this.handleClick.bind(this));
-        this.shadowRoot.appendChild(button);
     }
 
     connectedCallback() {
