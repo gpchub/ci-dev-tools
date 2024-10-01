@@ -1,10 +1,10 @@
 <my-card x-data="accounts">
-    <div class="flex justify-between flex-wrap items-center mb-4">
+    <header class="flex justify-between flex-wrap items-center mb-4">
         <h2 class="mb-0">Tài khoản</h2>
         <button primary @click="createAccount">Thêm mới</button>
-    </div>
+    </header>
 
-    <div class="account-list" x-sort="(item, position) => { onSortAccount(item, position) }" x-ref="accountList">
+    <section class="account-list" x-sort="(item, position) => { onSortAccount(item, position) }" x-ref="accountList">
         <template x-for="(item, index) in accounts" :key="item.id">
             <div class="account-item" x-sort:item="item">
                 <div class="account-item__view">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </template>
-    </div>
+    </section>
 
     <dialog x-ref="dialog" class="modal">
         <div class="modal-body">

@@ -42,6 +42,7 @@ function unmaskNumber(str, thousand = '.') {
     return str.replaceAll(thousand, '');
 }
 
+
 /*---------- Menu ---------- */
 document.addEventListener('alpine:init', () => {
     Alpine.data('dropdown', () => ({

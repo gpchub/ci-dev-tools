@@ -445,6 +445,35 @@ my-code-block { overflow: auto }
     padding: .25rem .25rem .25rem 2.5rem;
     height: 38px;
 }
+
+/*---------- Alert ---------- */
+.alert {
+    --color: rgb(31 41 55);
+    --bg: rgb(249 250 251);
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--color);
+    background-color: var(--bg);
+}
+.alert.is-success {
+    --color: #134e4a;
+    --bg: #ccfbf1;
+}
+
+.alert.is-danger {
+    --color: #7f1d1d;
+    --bg: #fee2e2;
+}
+.alert.is-warning {
+    --color: #713f12;
+    --bg: #fef3c7;
+}
+.alert.is-info {
+    --color: #0c4a6e;
+    --bg: #dbeafe;
+}
+
 /*=============================================
 =            Page PX - REM         =
 =============================================*/

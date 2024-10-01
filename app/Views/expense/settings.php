@@ -18,9 +18,10 @@
 			</nav>
 		</header>
 
-		<div class="grid-auto">
+		<div class="grid md:grid-cols-2 gap-4">
 			<?= $this->include('expense/partials/accounts') ?>
 			<?= $this->include('expense/partials/categories') ?>
+			<?= $this->include('expense/partials/tools') ?>
 		</div>
 
     </section>
@@ -35,5 +36,6 @@
 
 <?= $this->include('expense/partials/accounts-script') ?>
 <?= $this->include('expense/partials/categories-script') ?>
+<?= $this->include('expense/partials/tools-script') ?>
 
 <?= $this->endSection() ?>
