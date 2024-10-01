@@ -42,7 +42,17 @@
                 <li><a href="#">Calculator</a></li>
                 <li><a href="#">WordPress</a></li>
                 <li><a href="#">JSON</a></li>
-                <li><a href="<?= url_to('personal.todo') ?>">Todo</a></li>
+
+                <li x-data="{ open: false }" :class="{ 'open': open }">
+                    <a href="javascript:;" @click.prevent="open = !open" @click.outside="open = false">
+                        Cá nhân <i class='bx bx-chevron-down'></i>
+                    </a>
+
+                    <ul>
+                        <li><a href="<?= url_to('personal.todo') ?>">Todo</a></li>
+                        <li><a href="<?= url_to('expense.index') ?>">Thu chi</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

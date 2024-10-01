@@ -9,4 +9,10 @@ class Personal extends BaseController
         $page_title = 'To do list';
         return view('personal/todo', compact('page_title'));
     }
+
+    public function expense()
+    {
+        $page_title = 'Quản lý thu chi';
+        return view('personal/expense', compact('page_title'));
+    }
 }

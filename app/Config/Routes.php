@@ -21,3 +21,7 @@ $routes->get('/css-tools/prefix-breakpoint', 'CssTools::prefixBreakpoint', ['as'
 
 $routes->get('/personal/todo', 'Personal::todo', ['as' => 'personal.todo']);
 
+$routes->get('/personal/thu-chi', 'ExpenseManager::index', ['as' => 'expense.index']);
+$routes->get('/personal/thu-chi/thong-ke', 'ExpenseManager::stats', ['as' => 'expense.stats']);
+$routes->get('/personal/thu-chi/thiet-lap', 'ExpenseManager::settings', ['as' => 'expense.settings']);
+
