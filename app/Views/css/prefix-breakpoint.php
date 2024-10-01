@@ -10,11 +10,8 @@
             <my-card>
                 <form action="">
                     <div class="form-group">
-                        <label>Có media query <input type="checkbox" x-model="hasMediaQuery" /></label>
-                    </div>
-                    <div class="form-group">
                         <label>CSS Code</label>
-                        <textarea x-model="input" rows="20"></textarea>
+                        <textarea x-model="input" rows="17"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -40,7 +37,7 @@
         Alpine.data('app', () => ({
             result: '',
             input: '',
-            hasMediaQuery: false,
+            hasMediaQuery: true,
 
             generate() {
                 const regex = /.(.*)\s?{/gm;
@@ -56,7 +53,7 @@
                     lg = `@media (min-width: 992px) {\n${lg}\n}`;
                 }
 
-                this.result = [md, lg].join("\n\n");
+                this.result = [this.input, md, lg].join("\n\n");
             },
         }));
     })
