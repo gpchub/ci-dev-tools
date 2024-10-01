@@ -1,7 +1,15 @@
 <script>
 	document.addEventListener('alpine:init', () => {
 		Alpine.data('app', () => ({
-			accounts: Alpine.$persist([]).as('gpc-expense-accounts'),
+			accounts: Alpine.$persist([{
+                id: 'cash',
+				title: 'Tiền mặt',
+				abbr: 'C',
+				openingBalance: 0,
+				amount: 0,
+				color: '',
+				isDefault: true,
+            }]).as('gpc-expense-accounts'),
 			categories: [],
 
 			transactions: Alpine.$persist([]).as('gpc-expense-transactions'),
