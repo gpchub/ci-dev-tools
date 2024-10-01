@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://ci-dev-tools.test/';
+    public string $baseURL = 'http://example.com/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
