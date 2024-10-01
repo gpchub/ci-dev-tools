@@ -47,8 +47,8 @@
                 </div> -->
                 <div class="form-group">
                     <label>Số dư ban đầu</label>
-                    <?= view_cell('InputNumberCell', ['model' => 'accountForm.openingBalance', 'disabled' => 'editingAccount.id && editingAccount.id.length']) ?>
-                    <!-- <span class="help-text" x-show="editingAccount.id && editingAccount.id.length"><i class='bx bx-message-alt-error text-lg' style='color:#cb270d'  ></i> Thay đổi số dư ban đầu có thể ảnh hưởng đến số dư hiện tại của tài khoản</span> -->
+                    <?= view_cell('InputNumberCell', ['model' => 'accountForm.openingBalance']) ?>
+                    <span class="help-text" x-show="editingAccount.id && editingAccount.id.length"><i class='bx bx-message-alt-error text-lg' style='color:#cb270d'  ></i> Thay đổi số dư ban đầu có thể ảnh hưởng đến số dư hiện tại của tài khoản</span>
                 </div>
                 <div class="form-group">
                     <label>Màu</label>
