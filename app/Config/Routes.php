@@ -30,3 +30,5 @@ $routes->post('/json/json-php', 'JsonController::handleJsonToPhp', ['as' => 'jso
 $routes->post('/json/php-json', 'JsonController::handlePhpToJson', ['as' => 'json.php-json']);
 $routes->post('/json/sphp-json', 'JsonController::handleSerializedPhpToJson', ['as' => 'json.sphp-json']);
 
+$routes->get('/json/escape', 'JsonController::escapeJson', ['as' => 'json.escape']);
+

@@ -49,6 +49,7 @@
 
                     <ul>
                         <li><a href="<?= url_to('json.convert-php') ?>">JSON &harr; PHP</a></li>
+                        <li><a href="<?= url_to('json.escape') ?>">Escape JSON</a></li>
                     </ul>
                 </li>
 

@@ -18,6 +18,17 @@ class JsonController extends BaseController
         return view('json/convert_php', compact('page_title'));
     }
 
+    public function escapeJson()
+    {
+        $page_title = 'Escape/Unescape JSON';
+
+        return view('json/escape_json', compact('page_title'));
+    }
+
+    /*=============================================
+    =            Ajax            =
+    =============================================*/
+
     public function handleJsonToPhp()
     {
         $input = $this->request->getJsonVar('input');
@@ -40,7 +51,6 @@ class JsonController extends BaseController
         ];
 
         return $this->respond($data, ResponseInterface::HTTP_OK);
-
     }
 
     public function handlePhpToJson()
