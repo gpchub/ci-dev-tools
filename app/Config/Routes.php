@@ -25,3 +25,8 @@ $routes->get('/personal/thu-chi', 'ExpenseManager::index', ['as' => 'expense.ind
 $routes->get('/personal/thu-chi/thong-ke', 'ExpenseManager::stats', ['as' => 'expense.stats']);
 $routes->get('/personal/thu-chi/thiet-lap', 'ExpenseManager::settings', ['as' => 'expense.settings']);
 
+$routes->get('/json/convert-php', 'JsonController::convertPhp', ['as' => 'json.convert-php']);
+$routes->post('/json/json-php', 'JsonController::handleJsonToPhp', ['as' => 'json.json-php']);
+$routes->post('/json/php-json', 'JsonController::handlePhpToJson', ['as' => 'json.php-json']);
+$routes->post('/json/sphp-json', 'JsonController::handleSerializedPhpToJson', ['as' => 'json.sphp-json']);
+

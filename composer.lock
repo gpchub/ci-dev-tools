@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "657ac079313fab046eb8c29fe1d6992b",
+    "content-hash": "84f035e945ee87fdbb1048208550b80d",
     "packages": [
+        {
+            "name": "battye/php-array-parser",
+            "version": "v1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battye/php-array-parser.git",
+                "reference": "98c828cf5823579681e44b40f21e85e63481f4f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battye/php-array-parser/zipball/98c828cf5823579681e44b40f21e85e63481f4f5",
+                "reference": "98c828cf5823579681e44b40f21e85e63481f4f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "battye\\array_parser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Parse text representation of a PHP array into an actual PHP array.",
+            "keywords": [
+                "array",
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/battye/php-array-parser/issues",
+                "source": "https://github.com/battye/php-array-parser/tree/v1.0.10"
+            },
+            "time": "2021-11-18T04:29:53+00:00"
+        },
         {
             "name": "codeigniter4/framework",
             "version": "v4.5.5",
