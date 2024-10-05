@@ -10,6 +10,10 @@
             <div class="form-group">
                 <label>Nhập JSON cần escape hoặc unescape</label>
                 <textarea id="input" x-model="input" class="form-control" rows="10"></textarea>
+                <div class="help-text">
+                    <p>JSON hợp lệ khi key đặt trong dấu nháy kép, giá trị dạng chuỗi phải đặt trong dấu nháy kép, ví dụ <code>{"name":"John"}</code> hoặc <code>{"age":30}</code></p>
+                    <p>Nếu JSON không hợp lệ (ví dụ copy từ Javascript object) thì dùng extension <a href="https://marketplace.visualstudio.com/items?itemName=teddylun.json-utils" target="_blank">JSON Utils</a> trong VS Code để sửa lại.</p>
+                </div>
                 <span x-cloak x-show="inputError" class="error-message" x-text="inputError"></span>
             </div>
             <div class="form-group space-x-1">
