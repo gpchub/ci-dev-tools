@@ -8,6 +8,19 @@
 <section class="container" x-data="app">
         <div class="card mb-4">
             <div class="form-group">
+                <h4 class="mb-2">Nội dung được xử lý</h4>
+                <ul>
+                    <li>Xoá khoảng trắng trước các dấu câu (. , ? ! ; :), bỏ qua trường hợp dấu chấm trong số (ví dụ 2.0) và dấu 3 chấm</li>
+                    <li>Thêm khoảng trắng sau các dấu câu (. , ? ! ; :)</li>
+                    <li>Thêm dấu chấm cuối đoạn văn</li>
+                    <li>Xoá các khoảng trắng kế nhau</li>
+                    <li>Xoá khoảng trắng ở đầu và cuối đoạn văn trong dấu nháy kép <code>" "</code>, ngoặc tròn<code>( )</code>, ngoặc vuông <code>[ ]</code></li>
+                    <li>Viết hoa đầu dòng</li>
+                    <li>Thêm khoảng trắng và viết hoa sau dấu gạch đầu dòng</li>
+                    <li>Viết hoa đầu câu (sau dấu . ? !)</li>
+                </ul>
+            </div>
+            <div class="form-group">
                 <label>Nhập nội dung</label>
                 <textarea class="form-control" x-model="input" x-grow></textarea>
             </div>
@@ -55,6 +68,22 @@
 
                 // viết hoa sau dấu ?, !
                 text = text.replace(/(?<![\d\.])[?!\.]\s+(\p{Ll})/gu, (x) => x.toUpperCase());
+
+                // viết hoa đầu câu
+                text = text.replace(/^( *|- *|" *)(\p{Ll})/gmu, (x, p1, p2) => {
+                    p1 = p1.trim();
+                    if (p1 === '-') {
+                        p1 += ' ';
+                    }
+
+                    return p1 + p2.toUpperCase();
+                });
+
+                // xoá khoảng trắng cuối đoạn văn
+                text = text.replace(/( +)$/gm, '');
+
+                // thêm dấu chấm cuối đoạn văn
+                text = text.replace(/(?![\.!?:;"])(.)$/gmu, "$1.");
 
                 this.output = text;
 
