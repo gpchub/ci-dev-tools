@@ -13,7 +13,6 @@ $routes->get('/generator/qrcode', 'Generator::qrcode', ['as' => 'generator.qrcod
 
 $routes->get('/converter/list', 'Converter::list', ['as' => 'converter.list']);
 $routes->get('/converter/pxrem', 'Converter::pxrem', ['as' => 'converter.pxrem']);
-$routes->get('/converter/text-case', 'Converter::textCase', ['as' => 'converter.text-case']);
 
 $routes->get('/css-tools/css-spacing', 'CssTools::cssSpacing', ['as' => 'css-tools.css-spacing']);
 $routes->get('/css-tools/minify-css', 'CssTools::minifyCss', ['as' => 'css-tools.minify-css']);
@@ -33,4 +32,7 @@ $routes->post('/json/sphp-json', 'JsonController::handleSerializedPhpToJson', ['
 
 $routes->get('/json/escape', 'JsonController::escapeJson', ['as' => 'json.escape']);
 
-$routes->get('calc/aspect-ratio', 'CalculatorController::aspectRatio', ['as' => 'calc.aspect-ratio']);
+$routes->get('/calc/aspect-ratio', 'CalculatorController::aspectRatio', ['as' => 'calc.aspect-ratio']);
+
+$routes->get('/text/correct-punctuation', 'TextController::correctPunctuation', ['as' => 'text.correct-punctuation']);
+$routes->get('/text/cases', 'TextController::textCases', ['as' => 'text.cases']);

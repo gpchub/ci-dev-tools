@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label>Nhập nội dung</label>
-                <textarea class="form-control" x-model="input"></textarea>
+                <textarea class="form-control" x-model="input" x-grow></textarea>
             </div>
             <div class="form-group">
                 <label><input type="checkbox" x-model="removeVietnameseTones" /> Xoá dấu tiếng Việt</label>

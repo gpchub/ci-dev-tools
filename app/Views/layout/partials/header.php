@@ -26,7 +26,16 @@
                     <ul>
                         <li><a href="<?= url_to('converter.list') ?>">Danh sách</a></li>
                         <li><a href="<?= url_to('converter.pxrem') ?>">Đổi px ↔ rem</a></li>
-                        <li><a href="<?= url_to('converter.text-case') ?>">Đổi kiểu chữ</a></li>
+                    </ul>
+                </li>
+                <li x-data="{ open: false }" :class="{ 'open': open }">
+                    <a href="javascript:;" @click.prevent="open = !open" @click.outside="open = false">
+                        Văn bản <i class='bx bx-chevron-down'></i>
+                    </a>
+
+                    <ul>
+                        <li><a href="<?= url_to('text.cases') ?>">Đổi kiểu chữ</a></li>
+                        <li><a href="<?= url_to('text.correct-punctuation') ?>">Chỉnh sửa dấu câu</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">

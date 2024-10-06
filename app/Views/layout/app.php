@@ -24,6 +24,7 @@
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/maska@3/dist/cdn/alpine.js" defer></script>
+    <script src="<?= site_url('js/alpine/textarea-autogrow.js'); ?>" defer></script>
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
