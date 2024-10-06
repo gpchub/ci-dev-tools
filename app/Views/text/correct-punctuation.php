@@ -69,21 +69,22 @@
                 // viết hoa sau dấu ?, !
                 text = text.replace(/(?<![\d\.])[?!\.]\s+(\p{Ll})/gu, (x) => x.toUpperCase());
 
-                // viết hoa đầu câu
-                text = text.replace(/^( *|- *|" *)(\p{Ll})/gmu, (x, p1, p2) => {
-                    p1 = p1.trim();
-                    if (p1 === '-') {
-                        p1 += ' ';
-                    }
-
-                    return p1 + p2.toUpperCase();
-                });
-
                 // xoá khoảng trắng cuối đoạn văn
                 text = text.replace(/( +)$/gm, '');
 
                 // thêm dấu chấm cuối đoạn văn
                 text = text.replace(/(?![\.!?:;"])(.)$/gmu, "$1.");
+
+                // viết hoa đầu câu
+                text = text.replace(/^( *|- *|" *)(\p{Ll})/gmu, (x, p1, p2) => {
+                    console.log({x,p1,p2})
+                    p1 = p1.trim();
+                    if (p1 === '-') {
+                        p1 += ' ';
+                    }
+                    console.log({x,p1,p2})
+                    return p1 + p2.toUpperCase();
+                });
 
                 this.output = text;
 
