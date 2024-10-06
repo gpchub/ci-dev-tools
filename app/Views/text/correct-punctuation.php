@@ -52,16 +52,15 @@
                 text = text.replace(/(?<![\d\.])(\s*)(\.)(?!\.)/g, "$2 ");
 
                 // xoá khoảng trắng trước các dấu ?!,;: và thêm khoảng trắng vào sau
-                text = text.replace(/\s*([?!,;:])/g, "$1 ");
+                text = text.replace(/\s*([?!,;:])/gu, "$1 ");
 
-                //xoá khoảng trắng trong dấu nháy kép
-                text = text.replace(/"((?:\\.|[^"\\])*)"/g, (x, p1) => '"' + p1.trim() + '"');
+                //xoá khoảng trắng trong dấu nháy kép, thêm khoảng trắng ở trước và sau bên ngoài nháy kép
+                text = text.replace(/"((?:\\.|[^"\\])*)"/g, (x, p1) => ' "' + p1.trim() + '" ');
 
-                //xoá khoảng trắng trong dấu ngoặc tròn
-                text = text.replace(/\(((?:\\.|[^)\\])*)\)/g, (x, p1) => '(' + p1.trim() + ')');
-
-                //xoá khoảng trắng trong dấu ngoặc vuông
-                text = text.replace(/\[((?:\\.|[^]\\])*)\]/g, (x, p1) => '[' + p1.trim() + ']');
+                //xoá khoảng trắng trong dấu ngoặc vuông, ngoặc tròn, thêm khoảng trắng ở trước và sau bên ngoài
+                text = text.replace(/(\p{Ps})((?:\\.|[^\p{Pe}])*)(\p{Pe})/gu, (x, p1, p2, p3) => {
+                    return ` ${p1}${p2.trim()}${p3} `;
+                });
 
                 // xoá khoảng trắng thừa giữa các từ (2 khoảng trắng kế nhau)
                 text = text.replace(/\p{Zs}+/gu, ' ');
@@ -77,12 +76,10 @@
 
                 // viết hoa đầu câu
                 text = text.replace(/^( *|- *|" *)(\p{Ll})/gmu, (x, p1, p2) => {
-                    console.log({x,p1,p2})
                     p1 = p1.trim();
                     if (p1 === '-') {
                         p1 += ' ';
                     }
-                    console.log({x,p1,p2})
                     return p1 + p2.toUpperCase();
                 });
 
