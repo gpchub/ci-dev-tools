@@ -66,8 +66,8 @@
                 // xoá khoảng trắng thừa giữa các từ (2 khoảng trắng kế nhau)
                 text = text.replace(/\p{Zs}+/gu, ' ');
 
-                // viết hoa sau dấu ?, !
-                text = text.replace(/(?<![\d\.])[?!\.]\s+(\p{Ll})/gu, (x) => x.toUpperCase());
+                // viết hoa sau dấu ., ?, !
+                text = text.replace(/(?<![\d\.])[?!\.] +(\p{Ll})/gu, (x) => x.toUpperCase());
 
                 // xoá khoảng trắng cuối đoạn văn
                 text = text.replace(/( +)$/gm, '');
