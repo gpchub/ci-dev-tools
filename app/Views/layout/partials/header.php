@@ -26,6 +26,7 @@
                     <ul>
                         <li><a href="<?= url_to('converter.list') ?>">Danh sách</a></li>
                         <li><a href="<?= url_to('converter.pxrem') ?>">Đổi px ↔ rem</a></li>
+                        <li><a href="<?= url_to('converter.text-case') ?>">Đổi kiểu chữ</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">
@@ -39,7 +40,15 @@
                         <li><a href="<?= url_to('css-tools.minify-css') ?>">Minify CSS</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Calculator</a></li>
+                <li x-data="{ open: false }" :class="{ 'open': open }">
+                    <a href="javascript:;" @click.prevent="open = !open" @click.outside="open = false">
+                        Calculator <i class='bx bx-chevron-down'></i>
+                    </a>
+
+                    <ul>
+                        <li><a href="<?= url_to('calc.aspect-ratio') ?>">Tính tỷ lệ</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">WordPress</a></li>
 
                 <li x-data="{ open: false }" :class="{ 'open': open }">

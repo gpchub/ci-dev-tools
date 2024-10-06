@@ -15,4 +15,10 @@ class Converter extends BaseController
         $page_title = 'Đổi px ↔ rem';
         return view('converter/pxrem', compact('page_title'));
     }
+
+    public function textCase()
+    {
+        $page_title = 'Đổi kiểu chữ';
+        return view('converter/text-case', compact('page_title'));
+    }
 }
