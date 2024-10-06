@@ -21,8 +21,8 @@
                 </ul>
             </div>
             <div class="form-group">
-                <label>Nhập nội dung</label>
-                <textarea class="form-control" x-model="input" x-grow></textarea>
+                <label>Nhập nội dung <a href="#" @click.prevent="inputSample"><small>(Nhập đoạn văn mẫu)</small></a></label>
+                <textarea class="form-control" x-model="input" rows="6" x-grow></textarea>
             </div>
 
             <div class="form-group">
@@ -41,6 +41,14 @@
         Alpine.data('app', () => ({
             input: '',
             output: '',
+
+            inputSample() {
+                this.input = `Sagittis at[ 1 ]donec, lobortis ultricies . Molestie elementum cubilia dui , litora per maecenas enim ut fames. Enim quis  lectus tincidunt ipsum luctus euismod aenean.
+Ad felis ( praesent tortor )nisi " aliquet dolor " non!Euismod montes elementum
+- facilisis cras enim. Eu aliquet laoreet; risus vestibulum tincidunt magna fames.
+-Est montes tristique dui magnis conubia
+-iaculis torquent venenatis velit. Cubilia lobortis vivamus magnis eget sapien facilisi pharetra.`;
+            },
 
             submit() {
                 let text = this.input;
@@ -75,7 +83,7 @@
                 text = text.replace(/(?![\.!?:;"])(.)$/gmu, "$1.");
 
                 // viết hoa đầu câu
-                text = text.replace(/^( *|- *|" *)(\p{Ll})/gmu, (x, p1, p2) => {
+                text = text.replace(/^( *|- *|" *)(\p{L})/gmu, (x, p1, p2) => {
                     p1 = p1.trim();
                     if (p1 === '-') {
                         p1 += ' ';
