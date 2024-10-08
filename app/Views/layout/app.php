@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="<?= site_url('js/alwan/alwan.min.css') ?>">
 
     <link rel="stylesheet" href="<?= site_url('css/style.css') ?>?v=<?= filemtime(public_path('css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= site_url('css/utilities.css') ?>?v=<?= filemtime(public_path('css/utilities.css')) ?>">
+
+    <script src="<?= site_url('js/components/codeblock.js') ?>?v=<?= filemtime(public_path('js/components/codeblock.js')) ?>"></script>
+    <script src="<?= site_url('js/components/card.js') ?>"></script>
+    <script src="<?= site_url('js/components/confirm-dialog.js') ?>"></script>
 
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
@@ -41,9 +46,7 @@
 
     <?= $this->renderSection('footer_scripts') ?>
 
-    <script src="<?= site_url('js/components/codeblock.js') ?>?v=<?= filemtime(public_path('js/components/codeblock.js')) ?>"></script>
-    <script src="<?= site_url('js/components/card.js') ?>"></script>
-    <script src="<?= site_url('js/components/confirm-dialog.js') ?>"></script>
+
 
     <script src="<?= site_url('js/flatpickr/plugins/confirmDate/confirmDate.js') ?>"></script>
     <script src="<?= site_url('js/flatpickr/plugins/monthSelect/index.js') ?>"></script>

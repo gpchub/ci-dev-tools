@@ -191,13 +191,22 @@ main {
 =            Components            =
 =============================================*/
 /*---------- Code block ---------- */
-my-code-block { overflow: auto }
+g-code-block { overflow: auto }
 
 /*---------- Card ---------- */
-.card {
+g-card, .card {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     padding: 1rem;
     border-radius: 0.25rem;
+    display: block;
+}
+
+g-card-title, .card-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 /*---------- Tooltip ---------- */

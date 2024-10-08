@@ -5,57 +5,55 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <section class="container" x-data="app">
-        <div class="grid-auto">
-            <my-card data-title="Thiết lập">
-                <form action="">
-                    <div class="form-group">
-                        <label>Số class</label>
-                        <input type="text" x-model="count">
+    <section class="container grid-auto" x-data="app">
+        <div class="card">
+            <h3 class="card-title">Thiết lập</h3>
+            <form action="">
+                <div class="form-group">
+                    <label>Số class</label>
+                    <input type="text" x-model="count">
+                </div>
+                <div class="form-group">
+                    <label>Tên biến</label>
+                    <input type="text" x-model="variableName">
+                </div>
+                <div class="form-group">
+                    <label>Thuộc tính</label>
+                    <div>
+                        <label><input type="checkbox" x-model="properties" value="margin"> margin</label>
+                        <label><input type="checkbox" x-model="properties" value="padding"> padding</label>
+                        <label><input type="checkbox" x-model="properties" value="gap"> gap</label>
+                        <label><input type="checkbox" x-model="properties" value="column_gap"> column-gap</label>
+                        <label><input type="checkbox" x-model="properties" value="row_gap"> row-gap</label>
+                        <label><input type="checkbox" x-model="properties" value="space_between"> space between</label>
                     </div>
-                    <div class="form-group">
-                        <label>Tên biến</label>
-                        <input type="text" x-model="variableName">
-                    </div>
-                    <div class="form-group">
-                        <label>Thuộc tính</label>
-                        <div>
-                            <label><input type="checkbox" x-model="properties" value="margin"> margin</label>
-                            <label><input type="checkbox" x-model="properties" value="padding"> padding</label>
-                            <label><input type="checkbox" x-model="properties" value="gap"> gap</label>
-                            <label><input type="checkbox" x-model="properties" value="column_gap"> column-gap</label>
-                            <label><input type="checkbox" x-model="properties" value="row_gap"> row-gap</label>
-                            <label><input type="checkbox" x-model="properties" value="space_between"> space between</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Breakpoint md (tablet)</label>
-                       <input type="text" x-model="breakpoints.md">
-                    </div>
-                    <div class="form-group">
-                        <label>Breakpoint lg (desktop)</label>
-                       <input type="text" x-model="breakpoints.lg">
-                    </div>
-                    <div class="form-group">
-                        <button @click.prevent="generate">Tạo code</button>
-                    </div>
-                </form>
-            </my-card>
+                </div>
+                <div class="form-group">
+                    <label>Breakpoint md (tablet)</label>
+                    <input type="text" x-model="breakpoints.md">
+                </div>
+                <div class="form-group">
+                    <label>Breakpoint lg (desktop)</label>
+                    <input type="text" x-model="breakpoints.lg">
+                </div>
+                <div class="form-group">
+                    <button @click.prevent="generate">Tạo code</button>
+                </div>
+            </form>
+        </div>
 
-            <my-card>
-                <div class="mb-3">
-                    <my-code-block x-text="root"></my-code-block>
-                    <template x-if="root">
-                        <div class="help-text">
-                            <p>5 giá trị đầu tham khảo theo Bootstrap.</p>
-                            <p>Điều chỉnh giá trị cho các biến trong phần root tuỳ theo nhu cầu.</p>
-                        </div>
-                    </template>
-                </div>
-                <div>
-                    <my-code-block x-text="result" class="max-h-128"></my-code-block>
-                </div>
-            </my-card>
+        <div class="card">
+            <div class="mb-3">
+                <g-code-block x-text="root"></g-code-block>
+                <template x-if="root">
+                    <div class="help-text">
+                        <p>5 giá trị đầu tham khảo theo Bootstrap.</p>
+                        <p>Điều chỉnh giá trị cho các biến trong phần root tuỳ theo nhu cầu.</p>
+                    </div>
+                </template>
+            </div>
+
+            <g-code-block x-text="result" class="max-h-128"></g-code-block>
         </div>
     </section>
 <?= $this->endSection() ?>

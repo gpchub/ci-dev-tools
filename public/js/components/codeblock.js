@@ -137,4 +137,4 @@ class CodeBlock extends HTMLElement
     }
 }
 
-customElements.define('my-code-block', CodeBlock);
+customElements.define('g-code-block', CodeBlock);

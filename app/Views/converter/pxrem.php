@@ -27,7 +27,7 @@
 
         <div class="card">
             <h3>Css Width & Height</h3>
-            <my-code-block x-text="css"></my-code-block>
+            <g-code-block x-text="css"></g-code-block>
         </h3>
     </section>
 <?= $this->endSection() ?>

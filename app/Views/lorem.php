@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label>Result</label>
-                    <my-code-block x-text="result"></my-code-block>
+                    <g-code-block x-text="result"></g-code-block>
                 </div>
                 <div class="form-group">
                     <button @click.prevent="serialize">Serialize</button>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label>Result</label>
-                    <my-code-block x-text="result"></my-code-block>
+                    <g-code-block x-text="result"></g-code-block>
                 </div>
                 <div class="form-group">
                     <button @click.prevent="random">Random</button>

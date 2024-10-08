@@ -104,7 +104,7 @@
         <div class="grid md:grid-cols-3 gap-3 todo">
             <!-- sidebar -->
             <div class="md:col-span-1">
-                <my-card data-title="Nhóm" class="groups mb-3">
+                <g-card data-title="Nhóm" class="groups mb-3">
                     <template x-for="(group, index) in groups" :key="group.id">
                         <div class="group-item" :id="group.id" @dblclick="editGroup(group)">
                             <a href="javascript:;"
@@ -143,7 +143,7 @@
                     <div class="form-group mt-3">
                         <input type="text" placeholder="Thêm nhóm mới" @keydown.enter="addGroup" x-model="newGroupTitle" />
                     </div>
-                </my-card>
+                </g-card>
 
             </div> <!-- /sidebar -->
 

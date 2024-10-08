@@ -1,22 +1,22 @@
-<my-card data-title="Xuất dữ liệu" x-data="toolExport">
+<g-card data-title="Xuất dữ liệu" x-data="toolExport">
     <div class="form-group">
         <label>Tài khoản</label>
-        <my-code-block x-text="accounts" class="h-40"></my-code-block>
+        <g-code-block x-text="accounts" class="h-40"></g-code-block>
     </div>
     <div class="form-group">
         <label>Danh mục</label>
-        <my-code-block x-text="categories" class="h-40"></my-code-block>
+        <g-code-block x-text="categories" class="h-40"></g-code-block>
     </div>
     <div class="form-group">
         <label>Thu chi</label>
-        <my-code-block x-text="transactions" class="h-40"></my-code-block>
+        <g-code-block x-text="transactions" class="h-40"></g-code-block>
     </div>
     <div class="form-group">
         <button primary @click="exportData">Xuất dữ liệu</button>
     </div>
-</my-card>
+</g-card>
 
-<my-card data-title="Nhập dữ liệu" x-data="toolImport">
+<g-card data-title="Nhập dữ liệu" x-data="toolImport">
     <div class="alert is-success mb-4" x-cloak x-show="isDone">
         Dữ liệu đã được nhập thành công. Refresh lại trang để xem kết quả.
     </div>
@@ -38,4 +38,4 @@
     <div class="form-group">
         <button primary @click="importData">Nhập dữ liệu</button>
     </div>
-</my-card>
+</g-card>

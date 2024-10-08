@@ -6,104 +6,66 @@
 
 <?= $this->section('content') ?>
     <section class="container" x-data="app">
-        <my-card>
-            <h2 class="text-center">Chuyển đổi từ</h2>
-            <div class="flex flex-wrap gap-3 items-center justify-center">
-                <template x-for="(value, key) in startFroms" :key="key">
-                    <label><input type="radio" value="key"/> <span x-text="value"></span></label>
+        <g-card class="mb-4">
+            <div class="form-group flex flex-wrap gap-3 items-center">
+                <label>Chuyển đổi từ</label>
+                <template x-for="(value, key) in inputTypes" :key="key">
+                    <label><input type="radio" x-model="inputType" :checked="key === inputType" :value="key"/> <span x-text="value"></span></label>
                 </template>
             </div>
-        </my-card>
+            <div class="form-group flex flex-wrap column-gap-3 items-center">
+                <label>Phân cách</label>
+                <input type="text" class="w-38" x-model="inputTextSeparator" />
+                <div class="help-text w-full">Phân cách theo dòng dùng dấu <code>\n</code></div>
+            </div>
+            <div class="form-group">
+                <textarea x-model="input"></textarea>
+            </div>
+            <div class="form-group">
+                <button @click="submit()">Thực hiện</button>
+            </div>
+        </g-card>
 
-        <div class="content">
-            <my-card title="Text" :class="{'order-first': startFrom == 'text'}">
-                <pre x-text="result"></pre>
-            </my-card>
+        <div class="grid-auto" style="--min:400px">
+            <g-card>
+                <h3 class="card-title">Text</h3>
+                <g-code-block x-text="outputText"></g-code-block>
+            </g-card>
+            <g-card>
+                <h3 class="card-title">JSON</h3>
+                <g-code-block x-text="outputJson"></g-code-block>
+            </g-card>
+            <g-card>
+                <h3 class="card-title">HTML</h3>
+                <g-code-block x-text="outputHTML"></g-code-block>
+            </g-card>
+            <g-card>
+                <h3 class="card-title">PHP</h3>
+                <g-code-block x-text="outputPHP"></g-code-block>
+            </g-card>
+
         </div>
     </section>
 <?= $this->endSection() ?>
 
 <?= $this->section('footer_scripts') ?>
-
-<script type="module">
-    import { faker } from '<?= site_url('js/fakerjs/index.js') ?>';
-    window.faker = faker;
-
-</script>
-
 <script>
 
     document.addEventListener('alpine:init', () => {
         Alpine.data('app', () => ({
-            startFroms: {
+            inputTypes: {
                 'text': 'Text',
                 'json': 'JSON',
                 'html': 'HTML',
                 'php': 'PHP'
             },
-            startFrom: 'text',
-
-            result: '',
-
-            setStartFrom(key) {
-                this.startFrom = key;
-
-                const mediaQuery = [
-                    { name: '', value: '' },
-                    { name: 'md', value: 'min-width: 768px' },
-                    { name: 'lg', value: 'min-width: 992px' },
-                    // { name: 'xl', value: 'min-width: 1400px' },
-                ];
-
-                let result = mediaQuery.map(x => {
-                    return this.generateSpacing(x).join('\n');
-                });
-
-                this.result = result.join('\n');
-            },
-
-            generateSpacing(breakpoint) {
-                let result = [];
-                const selectors = [
-                    { name: 'm', value: 'margin' },
-                    { name: 'mt', value: 'margin-top' },
-                    { name: 'mb', value: 'margin-bottom' },
-                    { name: 'ml', value: 'margin-left' },
-                    { name: 'mr', value: 'margin-right' },
-                    // { name: 'mx', value: 'margin-left, margin-right' },
-                    // { name: 'my', value: 'margin-top, margin-bottom' },
-                    { name: 'p', value: 'padding' },
-                    { name: 'pt', value: 'padding-top' },
-                    { name: 'pb', value: 'padding-bottom' },
-                    { name: 'pl', value: 'padding-left' },
-                    { name: 'pr', value: 'padding-right' },
-                    // { name: 'px', value: 'padding-left, padding-right' },
-                    // { name: 'py', value: 'padding-top, padding-bottom' },
-                ];
-
-                if (breakpoint.name) {
-                    result.push(`@media (${breakpoint.value}) {`);
-                }
-
-                selectors.forEach(selector => {
-                    for (let i = 0; i <= 5; i++) {
-                        className = breakpoint.name ? `\t.${selector.name}-${breakpoint.name}-${i}` : `.${selector.name}-${i}`;
-                        let parts = selector.value.split(',');
-                        let css = `${className}: {`;
-                        css += parts.map(x => {
-                            return `${x}: var(--spacer: ${i});`;
-                        }).join('');
-                        css += '}';
-                        result.push(css);
-                    }
-                });
-
-                if (breakpoint.name) {
-                    result.push(`}`);
-                }
-
-                return result;
-            }
+            inputType: 'text',
+            inputTextSeparator: '\n',
+            input: '',
+            outputText: '',
+            outputJson: '',
+            outputHTML: '',
+            outputPHP: '',
         }));
     })
 </script>

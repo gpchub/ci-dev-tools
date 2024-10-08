@@ -6,7 +6,7 @@
 
 <?= $this->section('content') ?>
     <section class="container" x-data="app">
-        <my-card class="mb-4">
+        <g-card class="mb-4">
             <label>Chọn loại input</label>
             <div class="flex flex-wrap gap-3">
                 <label><input type="radio" value="json" x-model="type" checked> JSON</label>
@@ -25,17 +25,17 @@
                 <button class="btn btn-primary" @click="await submit()">Thực hiện</button>
             </div>
 
-        </my-card>
+        </g-card>
 
         <div class="card grid-auto">
             <section class="mb-4">
                 <h3 x-text="label1" class="mb-2"></h3>
-                <my-code-block x-text="output1" class="max-h-96"></my-code-block>
+                <g-code-block x-text="output1" class="max-h-96"></g-code-block>
             </section>
 
             <section>
                 <h3 x-text="label2" class="mb-2"></h3>
-                <my-code-block x-text="output2" class="max-h-96"></my-code-block>
+                <g-code-block x-text="output2" class="max-h-96"></g-code-block>
             </section>
         </div>
     </section>

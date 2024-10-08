@@ -7,7 +7,8 @@
 <?= $this->section('content') ?>
     <section class="container" x-data="app">
         <div class="grid-auto">
-            <my-card>
+            <g-card>
+                <g-card-title>Input</g-card-title>
                 <form action="">
                     <div class="form-group">
                         <label>Nhập CSS Code</label>
@@ -18,13 +19,13 @@
                         <button @click.prevent="await generate()">Tạo code</button>
                     </div>
                 </form>
-            </my-card>
+            </g-card>
 
-            <my-card>
+            <g-card>
                 <div>
-                    <my-code-block x-text="result"></my-code-block>
+                    <g-code-block x-text="result"></g-code-block>
                 </div>
-            </my-card>
+            </g-card>
         </div>
     </section>
 <?= $this->endSection() ?>

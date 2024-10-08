@@ -7,7 +7,7 @@
 <?= $this->section('content') ?>
     <section class="container">
         <div class="grid-auto">
-            <my-card class="my-card" data-title="Danh sách theo thứ tự">
+            <g-card class="g-card" data-title="Danh sách theo thứ tự">
                 <form x-data="serialize">
                     <div class="form-group">
                         <label>Prefix</label>
@@ -27,14 +27,14 @@
                     </div>
                     <div class="form-group">
                         <label>Result</label>
-                        <my-code-block x-text="result"></my-code-block>
+                        <g-code-block x-text="result"></g-code-block>
                     </div>
                     <div class="form-group">
                         <button @click.prevent="submit">Thực hiện</button>
                     </div>
                 </form>
-            </my-card>
-            <my-card data-title="Danh sách ngẫu nhiên">
+            </g-card>
+            <g-card data-title="Danh sách ngẫu nhiên">
                 <form x-data="random">
                     <div class="form-group">
                         <label>Loại danh sách</label>
@@ -58,13 +58,13 @@
                     </div>
                     <div class="form-group">
                         <label>Result</label>
-                        <my-code-block x-text="result"></my-code-block>
+                        <g-code-block x-text="result"></g-code-block>
                     </div>
                     <div class="form-group">
                         <button @click.prevent="submit">Thực hiện</button>
                     </div>
                 </form>
-            </my-card>
+            </g-card>
         </div>
 
 

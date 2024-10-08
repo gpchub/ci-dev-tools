@@ -24,7 +24,7 @@
 
         <div class="card">
             <h3 class="mb-2">Kết quả</h3>
-            <my-code-block x-text="output" class="h-96"></my-code-block>
+            <g-code-block x-text="output" class="h-96"></g-code-block>
         </div>
 
     </section>

@@ -75,7 +75,7 @@
 			</aside>
 
 			<!-- danh sách thu chi -->
-			<my-card class="md:col-span-2" data-title="Danh sách thu chi">
+			<g-card class="md:col-span-2" data-title="Danh sách thu chi">
 
 				<header class="transaction-filter flex flex-wrap mb-4 gap-3">
 					<div class="flex gap-2 items-center">
@@ -119,7 +119,7 @@
 						</div>
 					</div>
 				</template>
-			</my-card>
+			</g-card>
 		</div> <!-- /.grid -->
 
 		<dialog x-ref="dialog" class="modal">

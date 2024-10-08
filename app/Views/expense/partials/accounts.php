@@ -1,4 +1,4 @@
-<my-card x-data="accounts">
+<g-card x-data="accounts">
     <header class="flex justify-between flex-wrap items-center mb-4">
         <h2 class="mb-0">Tài khoản</h2>
         <button primary @click="createAccount">Thêm mới</button>
@@ -64,5 +64,5 @@
             </form>
         </div>
     </dialog>
-</my-card>
+</g-card>
 

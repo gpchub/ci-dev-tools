@@ -1,4 +1,4 @@
-<my-card x-data="categories">
+<g-card x-data="categories">
     <div class="flex justify-between flex-wrap items-center mb-4">
         <h2 class="mb-0">Danh mục</h2>
         <button primary @click="createCategory">Thêm mới</button>
@@ -61,4 +61,4 @@
             </form>
         </div>
     </dialog>
-</my-card>
+</g-card>

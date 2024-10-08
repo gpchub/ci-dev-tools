@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="card ">
-            <my-code-block x-text="output"></my-code-block>
+            <g-code-block x-text="output"></g-code-block>
         </div>
     </section>
 <?= $this->endSection() ?>
