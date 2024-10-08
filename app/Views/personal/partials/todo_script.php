@@ -43,10 +43,9 @@
                 }
 
                 // Thêm pinTasks vào mỗi group ở version mới
-                this.groups.forEach(x => {
+                this.groups.forEach((x, index) => {
                     if (!Object.keys(x).includes('pinTasks')) {
-                        console.log(Object.keys(x));
-                        console.log('add pinTasks');
+                        x.pinTasks = [];
                     }
                 });
 
