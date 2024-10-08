@@ -215,9 +215,20 @@
                 task.editing = false;
             },
 
-            clearAllTasks() {
+            async clearAllTasks() {
+                let dialog = new ConfirmDialog({
+					questionTitle: 'Xoá hết tasks',
+					questionText: 'Bạn có chắc muốn xoá hết tasks không?',
+					type: 'danger',
+				});
+				const isConfirmed = await dialog.confirm();
+				if (!isConfirmed) {
+					return;
+				}
+
                 this.currentGroup.activeTasks = [];
                 this.currentGroup.doneTasks = [];
+                this.currentGroup.pinTasks = [];
             },
 
             clearAllDoneTasks() {
