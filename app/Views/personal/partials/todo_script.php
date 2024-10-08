@@ -169,12 +169,19 @@
                 this.moveTask(task, fromTask, toTask);
             },
 
-            toggleTaskStatus(task) {
+            toggleTaskStatus(task, list = '') {
                 //đóng edit khi đổi status
                 task.editing = false;
 
-                let fromList = task.done ? this.currentGroup.doneTasks : this.currentGroup.activeTasks;
-                let toList = task.done ? this.currentGroup.activeTasks : this.currentGroup.doneTasks;
+                let fromList = this.currentGroup.activeTasks;
+                if (list === 'done') {
+                    fromList = this.currentGroup.doneTasks;
+                } else if (list === 'pin') {
+                    fromList = this.currentGroup.pinTasks;
+                }
+
+                // nếu đổi trạng thái task đã xong thì chuyển sang active tasks
+                let toList = list === 'done' ? this.currentGroup.activeTasks : this.currentGroup.doneTasks;
 
                 this.moveTask(task, fromList, toList);
 

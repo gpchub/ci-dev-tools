@@ -197,7 +197,7 @@
                             x-sort:item="task"
                         >
                             <div class="task-item__view" x-show="!task.editing">
-                                <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task)" />
+                                <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task, 'pin')" />
                                 <span x-text="task.title"></span>
                             </div>
 
@@ -244,7 +244,7 @@
                             x-sort:item="task"
                         >
                             <div class="task-item__view" x-show="!task.editing">
-                                <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task)" />
+                                <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task, 'active')" />
                                 <span x-text="task.title"></span>
                             </div>
 
@@ -291,7 +291,7 @@
                         <template x-for="(task, index) in currentGroup.doneTasks" :key="task.id">
                             <div class="task-item" :class="{ 'done': task.done, 'editing': task.editing }">
                                 <div class="task-item__view" x-show="!task.editing">
-                                    <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task)" />
+                                    <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task, 'done')" />
                                     <span x-text="task.title"></span>
                                 </div>
 
