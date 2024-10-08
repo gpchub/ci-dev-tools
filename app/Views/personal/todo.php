@@ -28,6 +28,31 @@
     .item-actions button.is-save {
         color: #09a47d;
     }
+
+    button.is-unpin,
+    button.is-pin {
+        position: absolute;
+        top: -16px;
+        left: -16px;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-content: center;
+        font-size: 20px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    button.is-unpin i,
+    button.is-pin i {
+        transform: rotate(-45deg);
+    }
+
+    button.is-unpin i {
+        color: #d97706;
+    }
+
     .group-item:hover button,
     .task-item:hover button {
         opacity: 1;
@@ -61,6 +86,7 @@
         align-items: center;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
         margin-bottom: 8px;
+        position: relative;
     }
 
     .task-item__view {
@@ -158,11 +184,58 @@
                     <input type="text" x-model="newTaskTitle" placeholder="Thêm task mới" @keydown.enter="addTask" />
                 </div>
 
+                <!-- pin tasks -->
+                <div class="tasks mb-4"
+                    x-cloak x-show="currentGroup.pinTasks.length"
+                    x-data x-ref="tasksList"
+                    x-sort="(item, position) => { onSortTask(currentGroup.pinTasks, item, position) }"
+                >
+                    <template x-for="task in currentGroup.pinTasks" :key="task.id">
+                        <div class="task-item"
+                            :class="{ 'done': task.done, 'editing': task.editing }"
+                            @dblclick.stop="editTask(task)"
+                            x-sort:item="task"
+                        >
+                            <div class="task-item__view" x-show="!task.editing">
+                                <input type="checkbox" :checked="task.done" @change="toggleTaskStatus(task)" />
+                                <span x-text="task.title"></span>
+                            </div>
+
+                            <input x-show="task.editing"
+                                type="text"
+                                class="task-item__edit"
+                                :id="task.id + '-input'"
+                                x-model="task.title"
+                                @keydown.enter="saveTask(task)"
+                                @keydown.escape="cancelEditTask(task)"
+                            />
+                            <button class="is-unpin" x-show="!task.editing" @click="unpinTask(task)" data-tooltip="Bỏ ghim">
+                                <i class='bx bxs-pin'></i>
+                            </button>
+                            <div class="item-actions">
+                                <button class="is-edit" x-show="!task.editing" @click="editTask(task)" data-tooltip="Sửa">
+                                    <i class='bx bxs-edit'></i>
+                                </button>
+                                <button class="is-remove" x-show="!task.editing" @click="removeTask(task, 'pin')" data-tooltip="Xoá">
+                                    <i class='bx bx-trash' ></i>
+                                </button>
+                                <button class="is-cancel" x-show="task.editing" @click="cancelEditTask(task)" data-tooltip="Huỷ">
+                                    <i class='bx bx-x-circle'></i>
+                                </button>
+                                <button class="is-save" x-show="task.editing" @click="saveTask(task)" data-tooltip="Lưu">
+                                    <i class='bx bx-check-circle' ></i>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div> <!-- /.tasks -->
+
                 <!-- active tasks -->
                 <div class="tasks mb-4"
+                    x-data
                     x-cloak x-show="currentGroup.activeTasks.length"
-                    x-ref="activeTasksList"
-                    x-sort="(item, position) => { onSortTask(item, position) }"
+                    x-ref="tasksList"
+                    x-sort="(item, position) => { onSortTask(currentGroup.activeTasks, item, position) }"
                 >
                     <template x-for="task in currentGroup.activeTasks" :key="task.id">
                         <div class="task-item"
@@ -185,10 +258,13 @@
                             />
 
                             <div class="item-actions">
+                                <button class="is-pin" x-show="!task.editing" @click="pinTask(task)" data-tooltip="Ghim lên đầu">
+                                    <i class='bx bx-pin'></i>
+                                </button>
                                 <button class="is-edit" x-show="!task.editing" @click="editTask(task)" data-tooltip="Sửa">
                                     <i class='bx bxs-edit'></i>
                                 </button>
-                                <button class="is-remove" x-show="!task.editing" @click="removeTask(task)" data-tooltip="Xoá">
+                                <button class="is-remove" x-show="!task.editing" @click="removeTask(task, 'active')" data-tooltip="Xoá">
                                     <i class='bx bx-trash' ></i>
                                 </button>
                                 <button class="is-cancel" x-show="task.editing" @click="cancelEditTask(task)" data-tooltip="Huỷ">
@@ -220,7 +296,7 @@
                                 </div>
 
                                 <div class="item-actions">
-                                    <button class="is-remove" x-show="!task.editing" @click="removeTask(task)" data-tooltip="Xoá">
+                                    <button class="is-remove" x-show="!task.editing" @click="removeTask(task, 'done')" data-tooltip="Xoá">
                                         <i class='bx bx-trash' ></i>
                                     </button>
                                 </div>
@@ -240,213 +316,6 @@
     window.nanoid = nanoid;
 </script>
 
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('app', () => ({
-            groups: Alpine.$persist([{
-                id: 'my-tasks',
-                title: 'My tasks',
-                activeTasks: [],
-                doneTasks: [],
-                editing: false,
-            }]).as('gpc-todo-groups'),
-
-            activeTasks: [],
-
-            newGroupTitle: '',
-            groupAutoNumber: Alpine.$persist(1).as('gpc-todo-group-auto-number'), //dùng đặt tên group theo thứ tự tăng dần khi không nhập tên group khi tạo mới
-
-            newTaskTitle: '',
-
-            currentGroup: {},
-
-            init() {
-                const _this = this;
-
-                /**
-                 * Copy dữ liệu trong localStorage từ key cũ sang key mới
-                 */
-                const groups_old = localStorage.getItem("_x_groups");
-                const groupAutoNumber_old = localStorage.getItem("_x_groupAutoNumber");
-                if (groups_old) {
-                    this.groups = JSON.parse(groups_old).map(x => ({
-                        id: x.id,
-                        title: x.title,
-                        activeTasks: x.tasks.filter(x => !x.done),
-                        doneTasks: x.tasks.filter(x => x.done),
-                        editing: false,
-                    }));
-                    this.groupAutoNumber = groupAutoNumber_old;
-
-                    // xoá key cũ
-                    localStorage.removeItem("_x_groups");
-                    localStorage.removeItem("_x_groupAutoNumber");
-                }
-
-                this.currentGroup = this.groups[0];
-            },
-
-            newGroup(title) {
-                return {
-                    id: 'g-' + nanoid(),
-                    title: title,
-                    activeTasks: [],
-                    doneTasks: [],
-                    editing: false,
-                }
-            },
-
-            newTask(title) {
-                return {
-                    id: 't-' + nanoid(),
-                    title: title,
-                    done: false,
-                    editing: false,
-                    position: 0,
-                }
-            },
-
-            addGroup() {
-                let title = this.newGroupTitle.trim().length ? this.newGroupTitle.trim() : `My tasks ${this.groupAutoNumber}`;
-                this.groups.push(this.newGroup(title));
-
-                this.newGroupTitle = '';
-                this.groupAutoNumber++;
-            },
-
-            openGroup(group) {
-                this.currentGroup = group;
-            },
-
-            editGroup(group) {
-                //tắt edit ở tất cả groups
-                this.groups.forEach(x => { x.editing = false; });
-
-                //mở edit ở group này
-                this.group.editing = true;
-
-                //focus vào input edit
-                let input = this.$el.querySelector('#' + group.id + '-input');
-                if (input) {
-                    // set timeout để thực hiện sau khi alpine cập nhật DOM xong
-                    setTimeout(() => {
-                        input.focus();
-                    }, 150);
-                }
-            },
-
-            saveGroup(group) {
-                group.editing = false;
-            },
-
-            cancelEditGroup(group) {
-                group.editing = false;
-            },
-
-            removeGroup(group) {
-                // luôn giữ lại ít nhất 1 group
-                if (this.groups.length == 1) {
-                    return;
-                }
-
-                let index = this.groups.findIndex(x => x.id === group.id);
-                this.groups.splice(index, 1);
-
-                // nếu xoá group đang mở thì mở lại group đầu tiên
-                if (this.currentGroup.id === group.id) {
-                    this.currentGroup = this.groups[0];
-                }
-            },
-
-            addTask() {
-                let title = this.newTaskTitle.trim();
-                if (!title) {
-                    return;
-                }
-
-                // task mới thêm luôn là active
-                this.currentGroup.activeTasks.push(this.newTask(title))
-                this.newTaskTitle = '';
-            },
-
-            removeTask(task) {
-                task.editing = false;
-                let taskList = task.done ? this.currentGroup.doneTasks : this.currentGroup.activeTasks;
-                let index = taskList.findIndex(x => x.id === task.id);
-                taskList.splice(index, 1);
-            },
-
-            toggleTaskStatus(task) {
-                //đóng edit khi đổi status
-                task.editing = false;
-
-                let fromList = task.done ? this.currentGroup.doneTasks : this.currentGroup.activeTasks;
-                let toList = task.done ? this.currentGroup.activeTasks : this.currentGroup.doneTasks;
-
-                this.moveTask(task, fromList, toList);
-
-                task.done = !task.done;
-            },
-
-            moveTask(task, fromList, toList) {
-                let index = fromList.findIndex(x => x.id === task.id);
-                fromList.splice(index, 1);
-                toList.push(task);
-            },
-
-            editTask(task) {
-                /**
-                 * đóng edit ở tất cả các active tasks
-                 * edit chỉ có ở active tasks, tasks đã xong thì không cho edit
-                 */
-                this.currentGroup.activeTasks.forEach(x => { x.editing = false; });
-
-                //mở edit ở task này
-                task.editing = true;
-
-                //focus vào input edit
-                let input = this.$el.querySelector('#' + task.id + '-input');
-                if (input) {
-                    // set timeout để thực hiện sau khi alpine cập nhật DOM xong
-                    setTimeout(() => {
-                        input.focus();
-                    }, 150);
-                }
-            },
-
-            saveTask(task) {
-                task.editing = false;
-            },
-
-            cancelEditTask(task) {
-                task.editing = false;
-            },
-
-            clearAllTasks() {
-                this.currentGroup.activeTasks = [];
-                this.currentGroup.doneTasks = [];
-            },
-
-            clearAllDoneTasks() {
-                this.currentGroup.doneTasks = [];
-            },
-
-            onSortTask(item, position) {
-                //chỉ cho sort các tasks chưa làm
-                let taskList = this.currentGroup.activeTasks;
-                let oldIndex = taskList.findIndex(x => x.id === item.id);
-
-                taskList.splice(oldIndex, 1);
-                taskList.splice(position, 0, item);
-
-                this.currentGroup.activeTasks = taskList;
-
-                // cập nhật lại keys cho x-for, nếu không UI hiển thị sai thứ tự
-                // @see: https://github.com/alpinejs/alpine/discussions/4157
-                this.$refs.activeTasksList.querySelector("template")._x_prevKeys = taskList.map((item) => item.id);
-            },
-        }));
-    })
-</script>
+<?= $this->include('personal/partials/todo_script') ?>
 
 <?= $this->endSection() ?>
