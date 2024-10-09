@@ -12,24 +12,17 @@
                     <legend>Input</legend>
                     <div class="form-grid">
                         <label>Định dạng</label>
-                        <div class="flex flex-wrap gap-3">
-                            <template x-for="(value, key) in inputTypes" :key="key">
-                                <label><input type="radio" x-model="inputType" :checked="key === inputType" :value="key"/> <span x-text="value"></span></label>
-                            </template>
-                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-3">
+                                <template x-for="(value, key) in inputTypes" :key="key">
+                                    <label><input type="radio" x-model="inputType" :checked="key === inputType" :value="key"/> <span x-text="value"></span></label>
+                                </template>
+                            </div>
 
-                        <label x-show="inputType == 'text'">Phân cách</label>
-                        <div x-show="inputType == 'text'">
-                            <input type="text" x-model="inputTextSeparator" />
-                            <div class="help-text w-full">Phân cách theo dòng dùng dấu <code>\n</code></div>
-                        </div>
+                            <span x-show="inputType === 'text'" class="help-text">Mỗi mục là 1 dòng, mỗi dòng có dạng <code>label | value</code> hoặc <code>label</code></span>
 
-                        <label x-show="inputType == 'html'" x-cloak>Thẻ</label>
-                        <select x-model="inputHTMLTag" x-show="inputType == 'html'" x-cloak>
-                            <option value="ul">ul</option>
-                            <option value="ol">ol</option>
-                            <option value="select">select</option>
-                        </select>
+                            <span x-cloak x-show="inputType === 'html'" class="help-text"><code>label</code> là text giữa các tag, <code>value</code> là giá trị attribute <code>value</code> trong <code>&lt;option&gt;</code></span>
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -42,23 +35,23 @@
                             </template>
                         </div>
 
-                        <label x-show="outputType == 'text'">Phân cách</label>
-                        <div x-show="outputType == 'text'">
-                            <input type="text" x-model="outputTextSeparator" />
-                            <div class="help-text w-full">Phân cách theo dòng dùng dấu <code>\n</code></div>
-                        </div>
-
                         <label x-show="outputType == 'html'" x-cloak>Thẻ</label>
                         <select x-model="outputHTMLTag" x-show="outputType == 'html'" x-cloak>
+                            <option value="select">select</option>
                             <option value="ul">ul</option>
                             <option value="ol">ol</option>
-                            <option value="select">select</option>
                             <option value="p">p</option>
                             <option value="div">div</option>
                             <option value="span">span</option>
                         </select>
 
+                        <label x-show="outputType == 'html' && outputHTMLTag !== 'select'" x-cloak>Value attribute</label>
+                        <input type="text" x-model="outputValueAttribute" x-show="outputType == 'html' && outputHTMLTag !== 'select'" x-cloak>
+
                         <label class="col-span-full"><input type="checkbox" x-model="skipEmpty"> Bỏ qua chuỗi rỗng</label>
+                        <label class="col-span-full"><input type="checkbox" x-model="skipValue"> Bỏ qua value</label>
+                        <label class="col-span-full" x-show="outputType === 'text'"><input type="checkbox" x-model="wrapQuote"> Thêm nháy kép khi chuyển sang text</label>
+                        <label class="col-span-full" x-show="outputType === 'text'"><input type="checkbox" x-model="addSpace"> Thêm khoảng trắng giữa dấu phân cách</label>
                     </div>
                 </fieldset>
             </div>
@@ -89,8 +82,6 @@
                 'html': 'HTML',
             },
             inputType: 'text',
-            inputTextSeparator: "\\n",
-            inputHTMLTag: 'ul',
             input: '',
 
             outputTypes: {
@@ -98,10 +89,13 @@
                 'html': 'HTML',
             },
             outputType: 'text',
-            outputTextSeparator: ",",
-            outputHTMLTag: 'ul',
+            outputHTMLTag: 'select',
+            outputValueAttribute: 'data-value',
             output: '',
+            skipValue: false,
             skipEmpty: true,
+            wrapQuote: false,
+            addSpace: true,
 
             submit()
             {
@@ -109,44 +103,74 @@
 
                 switch (this.inputType) {
                     case 'text':
-                        inputArray = this.textToArray(this.input, this.inputTextSeparator, this.skipEmpty);
+                        inputArray = this.textToArray(this.input, this.skipEmpty);
                         break;
                     case 'html':
-                        inputArray = this.htmlToArray(this.input, this.inputHTMLTag, this.skipEmpty);
+                        inputArray = this.htmlToArray(this.input, this.skipEmpty);
                         break;
                 }
 
+                let separator = this.addSpace ? ' | ' : '|';
+
                 this.output = this.outputType === 'text' ?
-                    this.arrayToText(inputArray, this.outputTextSeparator) :
+                    this.arrayToText(inputArray, separator, this.wrapQuote) :
                     this.arrayToHtml(inputArray, this.outputHTMLTag);
             },
 
-            textToArray(text, separator, skipEmpty = false)
+            textToArray(text, skipEmpty = false)
             {
-                separator = separator.replaceAll("\\n", "\n");
-                let array = text.split(separator).map(item => item.trim());
-                return skipEmpty ? array.filter(item => item) : array;
+                let array = text.split("\n").map(item => item.trim());
+                array = skipEmpty ? array.filter(item => item) : array;
+
+                return array.map(item => {
+                    let parts = item.split('|');
+                    let p1 = parts[0] ? parts[0].trim() : '';
+                    let p2 = parts[1] ? parts[1].trim() : '';
+                    return [p1, p2];
+                });
             },
 
-            htmlToArray(html, tag, skipEmpty = false)
+            htmlToArray(html, skipEmpty = false)
             {
-                let itemTag = this.isListTag(tag) ? 'li' : 'option';
-                let regex = new RegExp(`<${itemTag}>(.*?)</${itemTag}>`, 'gm');
-                let matches = html.matchAll(regex);
+                // match[2]: value, match[3]: label
+                let matches = html.matchAll(/<([\w]+)(?:\s*value\s*=\s*['"]?(.+?)?['"]?)?>(.*?)<\/\1>/gm);
 
-                return skipEmpty ? Array.from(matches).map(item => item[1]).filter(item => item) : Array.from(matches).map(item => item[1]);
+                let array = [];
+                for (let match of matches) {
+                    if (skipEmpty && !match[2] && !match[3]) {
+                        continue;
+                    }
+                    let label = match[3] ? match[3].trim() : '';
+                    let value = match[2] ? match[2].trim() : '';
+                    array.push([label, value]);
+                }
+
+                return array;
             },
 
-            arrayToText(array, separator) {
-                separator = separator.replaceAll("\\n", "\n");
-                return array.join(separator);
+            arrayToText(array, separator = '|', quote = false) {
+                if (this.skipValue) {
+                    return array.map(item => quote ? `"${item[0]}"`: item[0]).filter(x => x.trim()).join("\n");
+                }
+
+                return array.map(item => {
+                    return quote ? item.map(item => `"${item}"`).join(separator) : item.join(separator);
+                }).join("\n");
             },
 
             arrayToHtml(array, tag) {
                 let itemTag = this.isListTag(tag) ? 'li' : this.isSelectTag(tag) ? 'option' : tag;
                 let hasChildren = this.isListTag(tag) || this.isSelectTag(tag);
                 let indent = hasChildren ? '\t' : '';
-                let html = array.map(item => `${indent}<${itemTag}>${item}</${itemTag}>`).join("\n");
+                let valueAttribute = this.isSelectTag(tag) ? 'value' : this.outputValueAttribute ? this.outputValueAttribute : 'data-value';
+                let html = array.map(item => {
+                    let label = item[0];
+                    let value = item[1];
+                    let html = this.skipValue ?
+                        `<${itemTag}>${label}</${itemTag}>` :
+                        `<${itemTag} ${valueAttribute}="${value}">${label}</${itemTag}>`;
+                    return indent + html;
+                }).join("\n");
 
                 if (hasChildren) {
                     html = `<${tag}>\n${html}\n</${tag}>`;

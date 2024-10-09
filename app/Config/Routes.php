@@ -11,6 +11,7 @@ $routes->get('/lorem', 'Lorem::index');
 $routes->get('/generator/list', 'Lorem::listGenerator', ['as' => 'generator.list']);
 $routes->get('/generator/qrcode', 'Generator::qrcode', ['as' => 'generator.qrcode']);
 
+$routes->get('/converter/text-list', 'Converter::textList', ['as' => 'converter.text-list']);
 $routes->get('/converter/list', 'Converter::list', ['as' => 'converter.list']);
 $routes->get('/converter/pxrem', 'Converter::pxrem', ['as' => 'converter.pxrem']);
 

@@ -24,6 +24,7 @@
                     </a>
 
                     <ul>
+                        <li><a href="<?= url_to('converter.text-list') ?>">Dấu phân cách</a></li>
                         <li><a href="<?= url_to('converter.list') ?>">Danh sách</a></li>
                         <li><a href="<?= url_to('converter.pxrem') ?>">Đổi px ↔ rem</a></li>
                     </ul>

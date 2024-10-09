@@ -10,6 +10,12 @@ class Converter extends BaseController
         return view('converter/list', compact('page_title'));
     }
 
+    public function textList()
+    {
+        $page_title = 'Chuyển đổi dấu phân cách';
+        return view('converter/text-list', compact('page_title'));
+    }
+
     public function pxrem()
     {
         $page_title = 'Đổi px ↔ rem';
