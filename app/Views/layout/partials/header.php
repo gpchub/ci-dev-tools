@@ -26,7 +26,6 @@
                     <ul>
                         <li><a href="<?= url_to('converter.text-list') ?>">Dấu phân cách</a></li>
                         <li><a href="<?= url_to('converter.list') ?>">Danh sách</a></li>
-                        <li><a href="<?= url_to('converter.pxrem') ?>">Đổi px ↔ rem</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">
@@ -48,6 +47,7 @@
                         <li><a href="<?= url_to('css-tools.prefix-breakpoint') ?>">Prefix breakpoint</a></li>
                         <li><a href="<?= url_to('css-tools.css-spacing') ?>">Css spacing</a></li>
                         <li><a href="<?= url_to('css-tools.minify-css') ?>">Minify CSS</a></li>
+                        <li><a href="<?= url_to('css-tools.pxrem') ?>">Đổi px ↔ rem</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">

@@ -19,6 +19,12 @@ class CssTools extends BaseController
         return view('css/css-spacing', compact('page_title'));
     }
 
+    public function pxrem()
+    {
+        $page_title = 'Đổi px ↔ rem';
+        return view('css/pxrem', compact('page_title'));
+    }
+
     public function minifyCss()
     {
         $page_title = 'Minify Css';

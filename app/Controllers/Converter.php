@@ -15,10 +15,4 @@ class Converter extends BaseController
         $page_title = 'Chuyển đổi dấu phân cách';
         return view('converter/text-list', compact('page_title'));
     }
-
-    public function pxrem()
-    {
-        $page_title = 'Đổi px ↔ rem';
-        return view('converter/pxrem', compact('page_title'));
-    }
 }
