@@ -23,7 +23,7 @@
 *, ::before, ::after {box-sizing:border-box}
 html:focus-within {scroll-behavior:smooth}
 body {padding:0 1rem; margin:auto; background:var(--b-bg-1); font-family:var(--b-font-main); text-rendering:optimizeSpeed; line-height:1.5; color:var(--b-txt); -moz-tab-size:4; tab-size:4; word-break:break-word; overflow-wrap:break-word; -webkit-tap-highlight-color:#fff0; -webkit-text-size-adjust:100%}
-h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, details, blockquote, pre, figure, table, address, hr, fieldset, iframe, audio, video {margin:0 0 1.5rem}
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, details, blockquote, pre, figure, table, address, hr, iframe, audio, video {margin:0 0 1.5rem}
 h1, h2, h3, h4, h5, h6 {line-height:1.25; text-wrap:balance}
 h1 {font-size:2rem}
 h2 {font-size:1.5rem}
@@ -59,7 +59,7 @@ th {text-align:left}
 ul, ol, dd {padding-left:2rem}
 li>ul, li>ol {margin-bottom:0}
 fieldset {padding:.5rem .75rem; border:1px solid var(--b-line); border-radius:.25rem}
-legend {padding:0 .25rem}
+legend {padding:0 .25rem;font-weight: 500;}
 label {cursor:pointer; display:block; margin-bottom:.25rem}
 button, input, select, textarea {margin:0; padding:.5rem .75rem; max-width:100%; background:var(--b-bg-2); border:0; border-radius:.25rem; font:inherit; line-height:1.5; color:var(--b-txt)}
 button, select {text-transform:none}

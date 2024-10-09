@@ -667,3 +667,45 @@
 	.lg\:space-y-4>:not([hidden])~:not([hidden]) { margin-top: var(--spacer-4) }
 	.lg\:space-y-5>:not([hidden])~:not([hidden]) { margin-top: var(--spacer-5) }
 }
+
+/* Gap */
+.col-gap-0 {column-gap: 0}
+.col-gap-1 {column-gap: var(--spacer-1)}
+.col-gap-2 {column-gap: var(--spacer-2)}
+.col-gap-3 {column-gap: var(--spacer-3)}
+.col-gap-4 {column-gap: var(--spacer-4)}
+.col-gap-5 {column-gap: var(--spacer-5)}
+.row-gap-0 {row-gap: 0}
+.row-gap-1 {row-gap: var(--spacer-1)}
+.row-gap-2 {row-gap: var(--spacer-2)}
+.row-gap-3 {row-gap: var(--spacer-3)}
+.row-gap-4 {row-gap: var(--spacer-4)}
+.row-gap-5 {row-gap: var(--spacer-5)}
+@media (min-width: 768px) {
+	.md\:col-gap-0 {column-gap: 0}
+	.md\:col-gap-1 {column-gap: var(--spacer-1)}
+	.md\:col-gap-2 {column-gap: var(--spacer-2)}
+	.md\:col-gap-3 {column-gap: var(--spacer-3)}
+	.md\:col-gap-4 {column-gap: var(--spacer-4)}
+	.md\:col-gap-5 {column-gap: var(--spacer-5)}
+	.md\:row-gap-0 {row-gap: 0}
+	.md\:row-gap-1 {row-gap: var(--spacer-1)}
+	.md\:row-gap-2 {row-gap: var(--spacer-2)}
+	.md\:row-gap-3 {row-gap: var(--spacer-3)}
+	.md\:row-gap-4 {row-gap: var(--spacer-4)}
+	.md\:row-gap-5 {row-gap: var(--spacer-5)}
+}
+@media (min-width: 992px) {
+	.lg\:col-gap-0 {column-gap: 0}
+	.lg\:col-gap-1 {column-gap: var(--spacer-1)}
+	.lg\:col-gap-2 {column-gap: var(--spacer-2)}
+	.lg\:col-gap-3 {column-gap: var(--spacer-3)}
+	.lg\:col-gap-4 {column-gap: var(--spacer-4)}
+	.lg\:col-gap-5 {column-gap: var(--spacer-5)}
+	.lg\:row-gap-0 {row-gap: 0}
+	.lg\:row-gap-1 {row-gap: var(--spacer-1)}
+	.lg\:row-gap-2 {row-gap: var(--spacer-2)}
+	.lg\:row-gap-3 {row-gap: var(--spacer-3)}
+	.lg\:row-gap-4 {row-gap: var(--spacer-4)}
+	.lg\:row-gap-5 {row-gap: var(--spacer-5)}
+}
