@@ -11,7 +11,11 @@
                 <form x-data="serialize">
                     <div class="form-group">
                         <label>Prefix</label>
-                        <input type="text" x-model="text">
+                        <input type="text" x-model="prefix">
+                    </div>
+                    <div class="form-group">
+                        <label>Suffix</label>
+                        <input type="text" x-model="suffix">
                     </div>
                     <div class="form-group">
                         <label>Count</label>
@@ -100,14 +104,15 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('serialize', () => ({
             separators: separators(),
-            text: '',
+            prefix: '',
+            suffix: '',
             result: '',
             count: 5,
             join: 'line',
 
             submit() {
                 let num = parseInt(this.count);
-                let arr = [ ...Array(num).keys() ].map( i => `${this.text}${(i + 1)}` );
+                let arr = [ ...Array(num).keys() ].map( i => `${this.prefix}${(i + 1)}${this.suffix}` );
                 let join = this.join === 'line' ? '\n' : (this.join === 'space' ? ' ' : this.join);
                 this.result = arr.join(join);
             }

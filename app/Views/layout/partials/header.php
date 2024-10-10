@@ -48,6 +48,7 @@
                         <li><a href="<?= url_to('css-tools.css-spacing') ?>">Css spacing</a></li>
                         <li><a href="<?= url_to('css-tools.minify-css') ?>">Minify CSS</a></li>
                         <li><a href="<?= url_to('css-tools.pxrem') ?>">Đổi px ↔ rem</a></li>
+                        <li><a href="<?= url_to('css-tools.color-types') ?>">Đổi loại mã màu</a></li>
                     </ul>
                 </li>
                 <li x-data="{ open: false }" :class="{ 'open': open }">

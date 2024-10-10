@@ -19,6 +19,7 @@ $routes->get('/css-tools/minify-css', 'CssTools::minifyCss', ['as' => 'css-tools
 $routes->post('/css-tools/minify-css', 'CssTools::doMinifyCss', ['as' => 'css-tools.minify-css.post']);
 $routes->get('/css-tools/prefix-breakpoint', 'CssTools::prefixBreakpoint', ['as' => 'css-tools.prefix-breakpoint']);
 $routes->get('/css-tools/pxrem', 'CssTools::pxrem', ['as' => 'css-tools.pxrem']);
+$routes->get('/css-tools/color-types', 'CssTools::colorTypes', ['as' => 'css-tools.color-types']);
 
 $routes->get('/personal/todo', 'Personal::todo', ['as' => 'personal.todo']);
 

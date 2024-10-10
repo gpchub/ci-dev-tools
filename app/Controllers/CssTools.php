@@ -25,6 +25,12 @@ class CssTools extends BaseController
         return view('css/pxrem', compact('page_title'));
     }
 
+    public function colorTypes()
+    {
+        $page_title = 'Chuyển đổi kiểu màu';
+        return view('css/color-types', compact('page_title'));
+    }
+
     public function minifyCss()
     {
         $page_title = 'Minify Css';
